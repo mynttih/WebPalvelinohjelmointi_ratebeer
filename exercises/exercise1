@@ -1,0 +1,51 @@
+[8] pry(main)> Brewery.create name: 'BrewDog', year: 2007
+   (0.1ms)  begin transaction
+  Brewery Create (0.3ms)  INSERT INTO "breweries" ("name", "year", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "BrewDog"], ["year", 2007], ["created_at", "2018-09-11 13:57:18.378321"], ["updated_at", "2018-09-11 13:57:18.378321"]]
+   (9.1ms)  commit transaction
+=> #<Brewery:0x000055b950385158
+ id: 5,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Tue, 11 Sep 2018 13:57:18 UTC +00:00,
+ updated_at: Tue, 11 Sep 2018 13:57:18 UTC +00:00>
+
+[10] pry(main)> Brewery.last
+  Brewery Load (0.2ms)  SELECT  "breweries".* FROM "breweries" ORDER BY "breweries"."id" DESC LIMIT ?  [["LIMIT", 1]]
+=> #<Brewery:0x000055b94f4f9080
+ id: 5,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Tue, 11 Sep 2018 13:57:18 UTC +00:00,
+ updated_at: Tue, 11 Sep 2018 13:57:18 UTC +00:00>
+[11] pry(main)> b = Brewery.last
+  Brewery Load (0.2ms)  SELECT  "breweries".* FROM "breweries" ORDER BY "breweries"."id" DESC LIMIT ?  [["LIMIT", 1]]
+=> #<Brewery:0x000055b94f060ac8
+ id: 5,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Tue, 11 Sep 2018 13:57:18 UTC +00:00,
+ updated_at: Tue, 11 Sep 2018 13:57:18 UTC +00:00>
+
+[13] pry(main)> b.beers.create name: 'Punk IPA', style: 'IPA'
+   (0.1ms)  begin transaction
+  Beer Create (0.3ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "IPA"], ["brewery_id", 5], ["created_at", "2018-09-11 13:59:38.329756"], ["updated_at", "2018-09-11 13:59:38.329756"]]
+   (8.4ms)  commit transaction
+=> #<Beer:0x000055b951268990
+ id: 13,
+ name: "Punk IPA",
+ style: "IPA",
+ brewery_id: 5,
+ created_at: Tue, 11 Sep 2018 13:59:38 UTC +00:00,
+ updated_at: Tue, 11 Sep 2018 13:59:38 UTC +00:00>
+
+[14] pry(main)> b.beers.create name:'Nanny State', style:'lowalcohol'
+   (0.1ms)  begin transaction
+  Beer Create (0.6ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nanny State"], ["style", "lowalcohol"], ["brewery_id", 5], ["created_at", "2018-09-11 14:00:40.240753"], ["updated_at", "2018-09-11 14:00:40.240753"]]
+   (9.2ms)  commit transaction
+=> #<Beer:0x000055b9510ceee0
+ id: 14,
+ name: "Nanny State",
+ style: "lowalcohol",
+ brewery_id: 5,
+ created_at: Tue, 11 Sep 2018 14:00:40 UTC +00:00,
+ updated_at: Tue, 11 Sep 2018 14:00:40 UTC +00:00>
