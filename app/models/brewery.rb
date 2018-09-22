@@ -1,15 +1,23 @@
 class Brewery < ApplicationRecord
-    include RatingAverage
+  include RatingAverage
 
-    has_many :beers, dependent: :destroy
-    has_many :ratings, through: :beers
+  validate :less_than_or_equal_to_current_year
 
-    #def average_rating
-    #    scores = self.ratings.map{ |rating| rating.score }
-    #    scores.inject{ |sum, score| sum + score}.to_f / scores.size
-    #end
-
-    def to_s
-        "#{self.name}"
+  def less_than_or_equal_to_current_year
+    if year > Time.now.year
+      errors.add(:year, "must be less than or equal to the current year")
     end
+  end
+
+  has_many :beers, dependent: :destroy
+  has_many :ratings, through: :beers
+
+  validates :name, presence: true
+  validates :year, numericality: { greater_than_or_equal_to: 1040,
+                                   less_than_or_equal_to_current_year: true,
+                                   only_integer: true }
+
+  def to_s
+    name
+  end
 end

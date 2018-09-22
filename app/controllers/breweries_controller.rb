@@ -63,28 +63,25 @@ class BreweriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_brewery
-      @brewery = Brewery.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def brewery_params
-      params.require(:brewery).permit(:name, :year)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_brewery
+    @brewery = Brewery.find(params[:id])
+  end
 
-    def authenticate
-      admin_accounts = { "pekka" => "beer", "arto" => "foobar", "matti" => "ittam", "vilma" => "kangas" }
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def brewery_params
+    params.require(:brewery).permit(:name, :year)
+  end
 
-      authenticate_or_request_with_http_basic do |username, password| 
-        if admin_accounts.include? username and admin_accounts[username] == password
-          login_ok = true
-        else
-          login_ok = false  # käyttäjätunnus/salasana oli väärä
-        end
-  
-        # koodilohkon arvo on sen viimeisen komennon arvo eli true/false riippuen kirjautumisen onnistumisesta
-        login_ok  
-      end
+  def authenticate
+    admin_accounts = { "pekka" => "beer", "arto" => "foobar", "matti" => "ittam", "vilma" => "kangas" }
+
+    authenticate_or_request_with_http_basic do |username, password|
+      login_ok =  (admin_accounts.include? username) && (admin_accounts[username] == password)
+
+      # koodilohkon arvo on sen viimeisen komennon arvo eli true/false riippuen kirjautumisen onnistumisesta
+      login_ok
     end
+  end
 end
