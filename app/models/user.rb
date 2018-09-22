@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
+  has_many :memberships
+  has_many :beer_clubs, through: :membership
 
   validates :username, uniqueness: true,
                        length: { minimum: 3,

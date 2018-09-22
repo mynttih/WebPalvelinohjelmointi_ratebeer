@@ -6,6 +6,16 @@
 
 <p> Has made <%= @user.ratings.count %> ratings, average rating <%= @user.average_rating %> </p>
 
+member of
+
+<% if !@user.memberships.empty? %>
+  <ul>
+    <% @user.memberships.each do |membership| %>
+      <li> <%= link_to membership.beer_club.name, beer_club_path(membership.beer_club) %> </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h3> ratings </h3>
 
 <ul>

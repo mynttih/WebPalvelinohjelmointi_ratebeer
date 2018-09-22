@@ -4,9 +4,7 @@ class Brewery < ApplicationRecord
   validate :less_than_or_equal_to_current_year
 
   def less_than_or_equal_to_current_year
-    if year > Time.now.year
-      errors.add(:year, "must be less than or equal to the current year")
-    end
+    errors.add(:year, "must be less than or equal to the current year") if year > Time.now.year
   end
 
   has_many :beers, dependent: :destroy
