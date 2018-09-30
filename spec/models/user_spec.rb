@@ -56,6 +56,38 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "favorite style" do
+    let(:user) { FactoryBot.create(:user) }
+
+    it "has method for determining one" do
+      expect(user).to respond_to(:favorite_style)
+    end
+
+    it "is the one with highest average rating if several rated" do
+      create_beers_with_many_ratings({ user: user, style: "Lager" }, 32, 20, 15, 35, 18)
+      create_beers_with_many_ratings({ user: user, style: "Pale Ale" }, 12, 20, 15, 7, 5)
+
+      expect(user.favorite_style).to eq("Lager")
+    end
+  end
+
+  describe "favorite brewery" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:brewery1) { FactoryBot.create(:brewery, name:"anonymous1") }
+    let(:brewery2) { FactoryBot.create(:brewery, name:"anonymous2") }
+
+    it "has method for determining one" do
+      expect(user).to respond_to(:favorite_brewery)
+    end
+
+    it "is the one with highest average rating if several rated" do
+      create_beers_with_many_ratings({ user: user, brewery: brewery1 }, 10, 20, 15, 7, 9)
+      create_beers_with_many_ratings({ user: user, brewery: brewery2 }, 23, 20, 15, 27, 30)
+
+      expect(user.favorite_brewery).to eq(brewery2)
+    end
+  end
+
   describe "with a proper password" do
     let(:user) { FactoryBot.create(:user) }
 

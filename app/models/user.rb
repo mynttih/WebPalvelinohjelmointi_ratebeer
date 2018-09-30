@@ -20,4 +20,41 @@ class User < ApplicationRecord
 
     ratings.order(score: :desc).limit(1).first.beer
   end
+
+  def favorite_style
+    return nil if ratings.empty?
+
+    ratings_grouped = ratings.group_by{ |r| r.beer.style }
+    style_avgs = get_style_averages(ratings_grouped)
+    style_avgs.key(style_avgs.values.max)
+  end
+
+  def favorite_brewery
+    return nil if ratings.empty?
+
+    ratings_grouped = ratings.group_by{ |r| r.beer.brewery }
+    brewery_avgs = get_brewery_averages(ratings_grouped)
+    brewery_avgs.key(brewery_avgs.values.max)
+  end
+
+  def get_style_averages(ratings_grouped_by_style)
+    avgs_by_style = {}
+    ratings_grouped_by_style.keys.each do |style|
+      avgs_by_style[style] = get_list_of_ratings_average(ratings_grouped_by_style[style])
+    end
+    avgs_by_style
+  end
+
+  def get_brewery_averages(ratings_grouped_by_brewery)
+    avgs_by_brewery = {}
+    ratings_grouped_by_brewery.keys.each do |brewery|
+      avgs_by_brewery[brewery] = get_list_of_ratings_average(ratings_grouped_by_brewery[brewery])
+    end
+    avgs_by_brewery
+  end
+
+  def get_list_of_ratings_average(ratings)
+    scores = ratings.map(&:score)
+    scores.inject{ |sum, score| sum + score }.to_f / scores.size
+  end
 end
