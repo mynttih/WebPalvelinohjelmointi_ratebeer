@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+- 2.5.1
+script:
+- bundle exec rails db:migrate
+- bundle exec rspec -fd spec
+deploy:
+  provider: heroku
+  api_key:
+    secure: YuYvTWeGIZW3WeXtPiWLJlk8DNmsJOYW+tN9xLZjjEPZiu8GG8nkWYUXfnna3TDMMGaZ7RXAGx79q6IScfHm2GJw1zPPueeS7wMSjAtXd5GuCHDm1hUIh7sIvFDFO4bh2BYYlP3XLsfkzUtbLWMnhzHRYKLfBd1qb2MxRDjRbOdYrWLgS198nlTU2jIT8m/BWdN5NjwOGk45qE03wOswzWtu+rtiJZiIhaG2a+4ZjjPzBL9cAM1bjRh67w+n7MrTAMNp8XY827sX4bXQ6NSh0mLaYj+USPGIp/AHEaFyuyvbxUtWx+Klmyx+D2kx8viOVEbTau3XU7zd0yA/T+6bqPIijHJ7pCZEIZc6v5mgh2e7138aKwVIoJklTP711unfwpln/Qxhfqkv2BS1heq4nQH4GiN0JvL5oe6Vsl8YBtqyDA+OLpcRCBTFJ1X+ugEqRZuIQbkoT5/D3eQFPqE9f523yT4S4bccu5m/ck9no5VeJG7apg6SpV8zQIjFkwFy98ZF4pRhynteChWS0jqMwTC4lwZd5Z/rWWFMYdsMB1mlV6wlLUmn5Rhwwm8GtjfTYh0SbDKNLYiB+DHbCv+CELfB/0qYCc8V3ZAYjn4LRm3sxfi3bTMXOWxcaXWagTV1YqgVvNzyiM0Sh52jvnfUc7M2BE0yVIzK9Pmv2lWrd1k=
+  app: webpalvelinohjelm-ratebeer
+  on:
+    repo: mynttih/WebPalvelinohjelmointi_ratebeer
