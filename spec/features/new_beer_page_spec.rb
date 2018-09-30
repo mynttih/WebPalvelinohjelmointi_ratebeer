@@ -2,8 +2,11 @@ require 'rails_helper'
 
 describe "Beer" do
   let!(:brewery) { FactoryBot.create(:brewery) }
+  let!(:user) { FactoryBot.create :user }
 
   it "is added when name is valid" do
+    sign_in(username: "Pekka", password: "Foobar1")
+
     visit new_beer_path
     fill_in('beer_name', with: 'valid')
     select('Lager', from: 'beer_style')
@@ -15,6 +18,8 @@ describe "Beer" do
   end
 
   it "is not added when name is not valid" do
+    sign_in(username: "Pekka", password: "Foobar1")
+  
     visit new_beer_path
     fill_in('beer_name', with: '')
     select('Lager', from: 'beer_style')
