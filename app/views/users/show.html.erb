@@ -17,7 +17,7 @@ member of
 <% end %>
 
 <% if !@user.ratings.empty? %>
-  favorite style: <%= @user.favorite_style %></br>
+  favorite style: <%= @user.favorite_style.name %></br>
   favorite brewery: <%= @user.favorite_brewery %>
 <% end %>
 

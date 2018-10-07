@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :beers
   resources :breweries
   resources :places, only: [:index, :show]
+  resources :styles, only: [:index, :show]
 
   root 'breweries#index'
 

@@ -28,7 +28,8 @@ class BeersController < ApplicationController
   # POST /beers
   # POST /beers.json
   def create
-    @beer = Beer.new(beer_params)
+    @style = Style.find beer_params[:style]
+    @beer = Beer.new name:beer_params[:name], style:@style, brewery_id:beer_params[:brewery_id]
 
     respond_to do |format|
       if @beer.save
@@ -80,6 +81,6 @@ class BeersController < ApplicationController
 
   def set_breweries_and_styles_for_template
     @breweries = Brewery.all
-    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
+    @styles = Style.all
   end
 end

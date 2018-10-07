@@ -4,7 +4,7 @@
 
 <%= form_for(@beer) do |f| %>
   Name: <%= f.text_field :name %>
-  Style: <%= f.select :style, options_for_select(@styles) %>
+  Style: <%= f.select :style, options_for_select(@styles.collect { |style| [style.name, style.id] }) %>
   <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :to_s) %>
   <%= f.submit %>
 <% end %>
