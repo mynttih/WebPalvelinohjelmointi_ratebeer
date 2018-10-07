@@ -29,7 +29,7 @@ class BeersController < ApplicationController
   # POST /beers.json
   def create
     @style = Style.find beer_params[:style]
-    @beer = Beer.new name:beer_params[:name], style:@style, brewery_id:beer_params[:brewery_id]
+    @beer = Beer.new name: beer_params[:name], style: @style, brewery_id: beer_params[:brewery_id]
 
     respond_to do |format|
       if @beer.save
