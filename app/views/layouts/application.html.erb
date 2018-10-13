@@ -10,27 +10,79 @@
   </head>
 
   <body>
-    <div class="navibar">
-      <%= link_to 'breweries', breweries_path %>
-      <%= link_to 'beers', beers_path %>
-      <%= link_to 'styles', styles_path %>
-      <%= link_to 'ratings', ratings_path %>
-      <%= link_to 'users', users_path %>
-      <%= link_to 'clubs', beer_clubs_path %>
-      <%= link_to 'places', places_path %>
-      |
-      <% if current_user %>
-        <%= link_to current_user.username, user_path(current_user) %>
-        <%= link_to 'rate a beer', new_rating_path %>
-        <%= link_to 'join a club', new_membership_path %>
-        <%= link_to 'signout', signout_path, method: :delete %>
-      <% else %>
-        <%= link_to 'signin', signin_path %>
-        <%= link_to 'signup', signup_path %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to 'breweries', breweries_path, { class: "nav-link" } %>
+          </li>      
+          <li class="nav-item">
+            <%= link_to 'beers', beers_path, { class: "nav-link" } %>
+          </li>     
+          <li class="nav-item">
+            <%= link_to 'styles', styles_path, { class: "nav-link" } %>
+          </li>   
+          <li class="nav-item">
+            <%= link_to 'ratings', ratings_path, { class: "nav-link" } %>
+          </li>       
+          <li class="nav-item">
+            <%= link_to 'users', users_path, { class: "nav-link" } %>
+          </li>  
+          <li class="nav-item">
+            <%= link_to 'clubs', beer_clubs_path, { class: "nav-link" } %>
+          </li>   
+          <li class="nav-item">
+            <%= link_to 'places', places_path, { class: "nav-link" } %>
+          </li> 
+          <% if current_user %>
+            <li class="nav-item">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= current_user.username %>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <%= link_to 'my page', current_user, { class: "dropdown-item" } %>
+                  <%= link_to 'rate a beer', new_rating_path, { class: "dropdown-item" } %>
+                  <%= link_to 'join a club', new_membership_path, { class: "dropdown-item" } %>
+                  <%= link_to 'signout', signout_path, { class: "dropdown-item", method: :delete  } %>
+                </div>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'signin', signin_path, { class: "nav-link" } %>
+            </li>  
+            <li class="nav-item">
+              <%= link_to 'signup', signup_path, { class: "nav-link" } %>
+            </li>                        
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    
+    <div class="container">
+      <% if notice %>
+        <div class="alert alert-primary" role="alert">
+          <%= notice %>
+        </div>
       <% end %>
 
+      <div class="row">
+        <div class="col-sm-8">
+          <%= yield %>
+        </div>
+        <div class="col-sm-4">
+          <img 
+            src="http://www.cs.helsinki.fi/u/mluukkai/wadror/pint.jpg" 
+            width="200"
+            style="padding-top:30px"
+          >
+        </div>
+      </div>
     </div>
-    
-    <%= yield %>
   </body>
 </html>

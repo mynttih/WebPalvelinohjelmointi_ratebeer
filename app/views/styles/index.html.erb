@@ -1,7 +1,18 @@
 <h1> Styles </h1>
 
-<ul>
-<% @styles.each do |style| %>
-  <li><%= link_to style.name, style %></li>
-<% end %>
-</ul>
+<table class="table hover-table">
+  <thead>
+    <tr>
+      <th>Style</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @styles.each do |style| %>
+      <tr>
+        <td><%= link_to style.name, style %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
