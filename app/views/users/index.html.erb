@@ -11,7 +11,12 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= link_to user.username, user %></td>
+        <td>
+          <%= link_to user.username, user %>
+          <% if current_user.admin && user.closed %>
+            <mark>account closed</mark>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -57,4 +57,9 @@ class User < ApplicationRecord
     scores = ratings.map(&:score)
     scores.inject{ |sum, score| sum + score }.to_f / scores.size
   end
+
+  def self.top(n)
+    sorted_by_rating_in_desc_order = User.all.sort_by{ |u| -(u.ratings.count || 0) }
+    sorted_by_rating_in_desc_order[0..n-1]
+  end
 end

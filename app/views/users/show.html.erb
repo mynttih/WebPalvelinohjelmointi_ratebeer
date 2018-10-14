@@ -1,8 +1,19 @@
 <h2>
   <%= @user.username %>
+  <% if @user.closed %>
+    <mark>account closed</mark>
+  <% end %>
 </h2>
 
-<p> Has made <%= @user.ratings.count %> ratings, average rating <%= @user.average_rating %> </p>
+<% if !(@user == current_user) && current_user.admin %>
+  <% if @user.closed %>
+    <%= link_to "open account", toggle_closed_user_path(@user), method: :post, class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to "close account", toggle_closed_user_path(@user), method: :post, class: "btn btn-danger" %>
+  <% end %>
+<% end %>
+
+<p> Has made <%= @user.ratings.count %> ratings, average rating <%= round(@user.average_rating) %> </p>
 
 member of
 
