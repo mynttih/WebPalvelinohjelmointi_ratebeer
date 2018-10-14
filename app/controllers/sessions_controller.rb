@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by username: params[:username]
     if user.closed?
-      redirect_back fallback_location: root_path, notice: "Your account has been closed, please contact admin" and return
+      redirect_back fallback_location: root_path, notice: "Your account has been closed, please contact admin" && return
     elsif user&.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to user_path(user), notice: "Welcome back!"

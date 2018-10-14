@@ -68,11 +68,11 @@ class UsersController < ApplicationController
 
   def toggle_closed
     user = User.find(params[:id])
-    user.update_attribute :closed, (not user.closed)
+    user.update_attribute :closed, !user.closed
 
     new_status = user.closed? ? "closed" : "opened"
 
-    redirect_to user, notice:"this account has been #{new_status}"
+    redirect_to user, notice: "this account has been #{new_status}"
   end
 
   private

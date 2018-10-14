@@ -18,9 +18,9 @@ class Brewery < ApplicationRecord
   scope :active, -> { where active: true }
   scope :retired, -> { where active: [nil, false] }
 
-  def self.top(n)
+  def self.top(number)
     sorted_by_rating_in_desc_order = Brewery.all.sort_by{ |b| -(b.average_rating || 0) }
-    sorted_by_rating_in_desc_order[0..n-1]
+    sorted_by_rating_in_desc_order[0..number - 1]
   end
 
   def to_s
