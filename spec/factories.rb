@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :style do
+    name { "European Pale Lager" }
+    description { "description" }
+  end
+
   factory :user do
     username { "Pekka" }
     password { "Foobar1" }
@@ -12,7 +17,7 @@ FactoryBot.define do
 
   factory :beer do
     name { "anonymous" }
-    style { "Lager" } 
+    style
     brewery
   end
 

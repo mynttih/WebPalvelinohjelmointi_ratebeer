@@ -47,19 +47,6 @@ describe "Ratings page" do
       @total_ratings = @ratings1.count + @ratings2.count
     end
 
-    it "shows all ratings and total number of ratings on ratings page" do
-      sign_in(username: "Pekka", password: "Foobar1")
-
-      visit ratings_path
-      @ratings1.each do |rating|
-        expect(page).to have_content rating
-      end
-      @ratings2.each do |rating|
-        expect(page).to have_content rating
-      end
-      expect(page).to have_content "Number of ratings: #{@total_ratings}"
-    end
-
     it "shows all ratings made by user on user page" do
       sign_in(username: "Pekka", password: "Foobar1")
 
