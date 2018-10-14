@@ -14,7 +14,7 @@
         <td>
           <%= link_to user.username, user %>
           <% if current_user.admin && user.closed %>
-            <mark>account closed</mark>
+            <span class="badge badge-info">account closed</span>
           <% end %>
         </td>
       </tr>

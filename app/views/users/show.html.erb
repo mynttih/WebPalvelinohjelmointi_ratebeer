@@ -1,13 +1,13 @@
 <h2>
   <%= @user.username %>
   <% if @user.closed %>
-    <mark>account closed</mark>
+    <span class="badge badge-info">account closed</span>
   <% end %>
 </h2>
 
 <% if !(@user == current_user) && current_user.admin %>
   <% if @user.closed %>
-    <%= link_to "open account", toggle_closed_user_path(@user), method: :post, class: "btn btn-primary" %>
+    <%= link_to "open account", toggle_closed_user_path(@user), method: :post, class: "btn btn-danger" %>
   <% else %>
     <%= link_to "close account", toggle_closed_user_path(@user), method: :post, class: "btn btn-danger" %>
   <% end %>
