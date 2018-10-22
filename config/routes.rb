@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   delete 'signout', to: 'sessions#destroy'
   get 'places', to: 'places#index'
   post 'places', to:'places#search'
+  get 'beerlist', to:'beers#list'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
